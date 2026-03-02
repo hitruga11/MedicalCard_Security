@@ -1,32 +1,27 @@
 def caesar_cipher(text, shift, mode='encrypt'):
-    result = ""
-    #режим decrypt меняем направление сдвига
+    # чтобы расшифровать просто инвертируем сдвиг
     if mode == 'decrypt':
         shift = -shift
 
+    result = ""
     for char in text:
-        # Обрабатываем только печатные символы ASCII от 32 до 126
-        # Это позволяет шифровать и буквы и цифры и спецсимволы
-        start_pos = 32
-        range_len = 95  # Количество печатных символов
 
-        new_char = chr((ord(char) - start_pos + shift) % range_len + start_pos)
-        result += new_char
+        result += chr(ord(char) + shift)
     return result
 
 
 def main():
-    print("Система защиты пароля MedicalCard")
-    password = input("Введите пароль пользователя: ")
-    key = 5  # ключ сдвига
+    print("Система MedicalCard")
+    password = input("Введите пароль: ")
+    key = 5
 
-    # Шифрование
-    encrypted = caesar_cipher(password, key, 'encrypt')
-    print(f"Зашифрованный пароль: {encrypted}")
+    # Шифруем
+    encrypted = caesar_cipher(password, key)
+    print(f"Зашифровано: {encrypted}")
 
-    # Расшифровка
+    # Расшифровываем
     decrypted = caesar_cipher(encrypted, key, 'decrypt')
-    print(f"Расшифрованный обратно: {decrypted}")
+    print(f"Исходный вид: {decrypted}")
 
 
 if __name__ == "__main__":
